@@ -3,7 +3,7 @@ sudo apt update
 sudo apt install snapd
 sudo snap install aws-cli --classic
 
-# find finary
+# find binary
 sudo find / -name aws_compl*
  /snap/aws-cli/428/aws/dist/aws_completer
  /snap/aws-cli/428/bin/aws_completer
@@ -12,10 +12,19 @@ sudo find / -name aws_compl*
 file /snap/aws-cli/428/aws/dist/aws_completer
  /snap/aws-cli/428/aws/dist/aws_completer: ELF 64-bit LSB executable...
 
+# connect aws_completer to aws command
 complete -C '/snap/aws-cli/428/aws/dist/aws_completer' aws
  aws <tab-tab>
  Display all 384 possibilities? (y or n)
 
+# run in each new session
+echo "complete -C '/snap/aws-cli/428/aws/dist/aws_completer' aws" >> ~/.bashrc
+
+# confirm
+grep complete ~/.bashrc
+  complete -C '/snap/aws-cli/428/aws/dist/aws_completer' aws
+
+
 # supporting documentation
 https://snapcraft.io/install/code/pop
-
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-completion.html
