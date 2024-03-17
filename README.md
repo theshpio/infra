@@ -3,12 +3,12 @@
 Create a cloud-native application that runs on Kubernetes in AWS, with infrastructure provisioned through Terraform and configured via Ansible. The application's lifecycle will be managed through a Jenkins CI/CD pipeline, and its operations will be monitored using the ELK stack.
 
 ### Step 1: Set Up the AWS Environment
-- [ ] AWS Account: AWS Free Tier
-- [ ] IAM User: Create an IAM user with programmatic access and adequate permissions for managing EC2 instances, EKS (Elastic Kubernetes Service), and other required services.
+- [x] AWS Account: AWS Free Tier
+- [x] IAM User: Create an IAM user with programmatic access and adequate permissions for managing EC2 instances, EKS (Elastic Kubernetes Service), and other required services.
 
 ### Step 2: Define Infrastructure with Terraform
-- [ ] Install Terraform: Download and install Terraform on local machine.
-- [ ] Terraform Scripts: Write Terraform scripts to provision:
+- [x] Install Terraform: Download and install Terraform on local machine.
+- [x] Terraform Scripts: Write Terraform scripts to provision basic resource
 - [ ] VPC, subnets, and other networking resources.
 - [ ] An EKS cluster to run Kubernetes application.
 - [ ] Any other AWS resources needed by application (e.g., RDS for databases, S3 for storage).
