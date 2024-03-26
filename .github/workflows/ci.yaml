@@ -1,0 +1,53 @@
+# Define workflow
+name: CI/CD Workflow
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  setup_aws_credentials:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - uses: actions/checkout@v2
+    - name: Configure AWS Credentials for GitHub Actions
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ASSUME_ROLE_NAME }}
+        aws-region: ${{ secrets.AWS_REGION }}
+        role-session-name: GitHubActionsSession
+        role-duration-seconds: 900
+
+  terraform:
+    needs: setup_aws_credentials  # Ensure this runs after the deploy job as they are dependent
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.7.5
+    - name: Terraform Init - Actions
+      run: terraform init
+      working-directory: terraform-actions/
+    - name: Terrafomr Format - Actions
+      run: terraform fmt -check
+      working-directory: terraform-actions/
+    - name: Terraform Plan - Actions
+      run: terraform plan
+      working-directory: terraform-actions/
+    - name: Terraform Init - Infra
+      run: terraform init
+      working-directory: terraform-infra/
+    - name: Terrafomr format - Infra
+      run: terraform fmt
+      working-directory: terraform-infra/
+    - name: Terraform Plan - Infra
+      run: terraform plan
+      working-directory: terraform-infra/
