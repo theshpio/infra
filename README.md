@@ -20,8 +20,7 @@ Create a cloud-native application that runs on Kubernetes in AWS, with infrastru
 - [ ] Any specific configurations needed within the Kubernetes cluster once it's provisioned by Terraform.
 
 ### Step 4: Set Up CI/CD with Jenkins
-- [ ] Jenkins Setup: Use an EC2 instance or manage Jenkins in Kubernetes as a pod.
-- [ ] Pipeline Configuration: Configure Jenkins pipelines for:
+- [x] Setup Github actions: workflow, jobs. steps, secrets
 - [ ] Continuous Integration: Code build, unit tests, and integration tests.
 - [ ] Continuous Deployment: Automated deployment of the application to the Kubernetes cluster upon successful build and tests.
 
