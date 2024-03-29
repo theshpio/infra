@@ -19,7 +19,7 @@ jobs:
     - name: Configure AWS Credentials for GitHub Actions
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ASSUME_ROLE_NAME }}
+        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.GITHA_ASSUME_ROLE }}
         aws-region: ${{ secrets.AWS_REGION }}
         role-session-name: GitHubActionsSession
         role-duration-seconds: 900
@@ -38,16 +38,5 @@ jobs:
       working-directory: terraform-actions/
     - name: Terrafomr Format - Actions
       run: terraform fmt -check
-      working-directory: terraform-actions/
-    - name: Terraform Plan - Actions
-      run: terraform plan
-      working-directory: terraform-actions/
-    - name: Terraform Init - Infra
-      run: terraform init
-      working-directory: terraform-infra/
-    - name: Terrafomr format - Infra
-      run: terraform fmt
-      working-directory: terraform-infra/
-    - name: Terraform Plan - Infra
-      run: terraform plan
-      working-directory: terraform-infra/
+      working-directory: terraform-actions/    
+
