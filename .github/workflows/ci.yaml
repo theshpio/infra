@@ -9,34 +9,65 @@ on:
       - develop
 
 jobs:
-  setup_aws_credentials:
+  deploy_on_aws:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
+    env:
+      TF_VAR_aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+      TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
+      TF_VAR_git_user: ${{ secrets.GIT_USER }}
+      TF_VAR_git_repo: ${{ secrets.GIT_REPO }}
+      TF_VAR_git_branch: ${{ secrets.GIT_BRANCH }}
+      TF_VAR_githa_assume_role: ${{ secrets.GITHA_ASSUME_ROLE }}
+      TF_VAR_ingres_22_cidr_blocks: ${{ secrets.INGRES_22_CIDR_BLOCKS }}
+      TF_VAR_ssh_key: ${{ secrets.SSH_KEY }}
+      
     steps:
-    - uses: actions/checkout@v2
+    - name: Git clone repository
+      uses: actions/checkout@v2
+
     - name: Configure AWS Credentials for GitHub Actions
       uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.GITHA_ASSUME_ROLE }}
         aws-region: ${{ secrets.AWS_REGION }}
-        role-session-name: GitHubActionsSession
-        role-duration-seconds: 900
-
-  terraform:
-    needs: setup_aws_credentials  # Ensure this runs after the deploy job as they are dependent
-    runs-on: ubuntu-latest
-    steps:
+        role-session-name: GitHubActions
     - uses: actions/checkout@v2
+
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 1.7.5
-    - name: Terraform Init - Actions
-      run: terraform init
-      working-directory: terraform-actions/
-    - name: Terrafomr Format - Actions
-      run: terraform fmt -check
-      working-directory: terraform-actions/    
+    # Terraforrm-Actions creates trust so Actions can deploy on AWS. It should be run locally.    
+    # - name: Terraform Init - Actions
+    #   run: terraform init
+    #   working-directory: terraform-actions/
+    # - name: Terrafomr Format - Actions
+    #   run: terraform fmt -check
+    #   working-directory: terraform-actions/    
+    # - name: Terraform Plan - Actions
+    #   run: terraform plan -input=false
+    #   working-directory: terraform-actions/
 
+    - name: Terraform Init - Infra
+      run: terraform init
+      working-directory: terraform-infra/
+
+    - name: Terrafomr format - Infra
+      run: terraform fmt -check
+      working-directory: terraform-infra/
+
+    - name: Terraform Plan - Infra
+      run: terraform plan -input=false
+      working-directory: terraform-infra/
+
+    - name: Terraform Apply - Infra
+      run: terraform apply -auto-approve
+      working-directory: terraform-infra/
+      continue-on-error: true  # Continue even if this step fails. It fails if the infra is already created.
+
+    - name: Terraform Destroy - Infra
+      run: terraform destroy -auto-approve
+      working-directory: terraform-infra/
