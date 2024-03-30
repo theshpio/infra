@@ -4,13 +4,13 @@ This project aims to create a platform with different tools and approaches to pr
 
 ## Done
 
-- `terraform-actions/` - Configures trust relationship between GitHub Actions and AWS account. Must be deployed manually.
-- `terraform-infra/` - Deploys simple infrastructure on AWS cloud for show-case.
+- `terraform-actions/` - Configures trust relationship between GitHub Actions and AWS account. Must be deployed locally.
+- `terraform-infra/` - Deploys infrastructure on AWS cloud. It will become the base for infra templates.
 
-## Next steps
-- [ ] Setup tfsate remote
+## Next 3 steps
+- [ ] Setup S3 and DynamoDB to manage tfstate
 - [ ] Refer to current branch, commit
-- [ ] Update doucmentation
+- [ ] Write .md files for each "terraform-<xxx>" to explain approaches and choices, share hints.
 
 ## Tech Stack
 
@@ -39,7 +39,7 @@ This project aims to create a platform with different tools and approaches to pr
 
 ## CI/CD Setup
 
-- [ ] Github Actions
+- [x] Github Actions, define workflow, jobs, steps. Explore and improve
 - [ ] Continuous Integration: Code build, unit tests, and integration tests.
 - [ ] Continuous Deployment: Automated deployment of the application to the Kubernetes cluster upon successful build and tests.
 
