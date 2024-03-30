@@ -7,10 +7,11 @@ This project aims to create a platform with different tools and approaches to pr
 - `terraform-actions/` - Configures trust relationship between GitHub Actions and AWS account. Must be deployed locally.
 - `terraform-infra/` - Deploys infrastructure on AWS cloud. It will become the base for infra templates.
 
-## Next 3 steps
+### Next steps
 - [ ] Setup S3 and DynamoDB to manage tfstate
-- [ ] Refer to current branch, commit
-- [ ] Write .md files for each "terraform-<xxx>" to explain approaches and choices, share hints.
+- [ ] Refer to current branch, commit.
+- [ ] Write .md files for each `terraform-<xxx>` to explain approaches and choices, share hints.
+- [ ] Setup environments (develop and production)
 
 ## Tech Stack
 
