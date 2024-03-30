@@ -4,8 +4,13 @@ This project aims to create a platform with different tools and approaches to pr
 
 ## Done
 
-- `terraform-actions/` - Configures trust relationship between GitHub Actions and AWS account.
-- `terraform-infra/` - Deploys simple infrastructure on AWS cloud.
+- `terraform-actions/` - Configures trust relationship between GitHub Actions and AWS account. Must be deployed manually.
+- `terraform-infra/` - Deploys simple infrastructure on AWS cloud for show-case.
+
+## Next steps
+- [ ] Setup tfsate remote
+- [ ] Refer to current branch, commit
+- [ ] Update doucmentation
 
 ## Tech Stack
 
