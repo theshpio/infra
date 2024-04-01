@@ -4,7 +4,7 @@ This project aims to create a platform with different tools and approaches to pr
 
 ## Done
 
-- `terraform-actions/` - Configures trust relationship between GitHub Actions and AWS account. Must be deployed locally.
+- `terraform-actions/` - Run locally to Configure the trust between GitHub Actions and AWS account.
 - `terraform-infra/` - Deploys infrastructure on AWS cloud. It will become the base for infra templates.
 
 ### Next steps
