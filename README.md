@@ -59,4 +59,3 @@ This project aims to create a platform with different tools and approaches to pr
 - [ ] Testing: Test the entire workflow from code commit, CI/CD pipeline, to deployment in Kubernetes, and monitoring.
 - [ ] Iteration: Refine configurations, scripts, and pipelines based on test outcomes.
 - [ ] Documentation: Document setup, configurations, and any important findings or decisions made during the project.
-

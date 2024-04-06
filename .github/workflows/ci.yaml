@@ -23,7 +23,7 @@ jobs:
       TF_VAR_githa_assume_role: ${{ secrets.GITHA_ASSUME_ROLE }}
       TF_VAR_ingres_22_cidr_blocks: ${{ secrets.INGRES_22_CIDR_BLOCKS }}
       TF_VAR_ssh_key: ${{ secrets.SSH_KEY }}
-      
+
     steps:
     - name: Git clone repository
       uses: actions/checkout@v2
@@ -40,13 +40,13 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 1.7.5
-    # Terraforrm-Actions creates trust so Actions can deploy on AWS. It should be run locally.    
+    # Terraforrm-Actions creates trust so Actions can deploy on AWS. It should be run locally.
     # - name: Terraform Init - Actions
     #   run: terraform init
     #   working-directory: terraform-actions/
     # - name: Terrafomr Format - Actions
     #   run: terraform fmt -check
-    #   working-directory: terraform-actions/    
+    #   working-directory: terraform-actions/
     # - name: Terraform Plan - Actions
     #   run: terraform plan -input=false
     #   working-directory: terraform-actions/
@@ -61,13 +61,4 @@ jobs:
 
     - name: Terraform Plan - Infra
       run: terraform plan -input=false
-      working-directory: terraform-infra/
-
-    - name: Terraform Apply - Infra
-      run: terraform apply -auto-approve
-      working-directory: terraform-infra/
-      continue-on-error: true  # Continue even if this step fails. It fails if the infra is already created.
-
-    - name: Terraform Destroy - Infra
-      run: terraform destroy -auto-approve
       working-directory: terraform-infra/

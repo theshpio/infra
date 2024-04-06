@@ -1,6 +1,6 @@
-### This repo is reflection on tutorials: 
+### This repo is reflection on tutorials:
 
-- [Define Infrastructure with Terraform Resources](https://developer.hashicorp.com/terraform/tutorials/configuration-language/resource) 
+- [Define Infrastructure with Terraform Resources](https://developer.hashicorp.com/terraform/tutorials/configuration-language/resource)
 
 - [Customize Terraform configuration with variables](https://developer.hashicorp.com/terraform/tutorials/configuration-language/variables)
 
